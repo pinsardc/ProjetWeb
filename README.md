@@ -1,2 +1,7 @@
 # ProjetWeb
-Projet de M1
+
+Contributeurs : Brian-Bruce LO & Cédric PINSARD
+
+Sujet : TODO
+
+Étapes : TODO
