@@ -42,9 +42,6 @@ export default {
     var headers = {
           'Content-Type': 'application/json'
       }
-   /* await axios.post('http://localhost:4000/api/users/allowCreation', data, {headers:headers}).then(function (response) {
-        console.log(response.data.message)
-      })*/
     axios.get('http://localhost:4000/api/test',{headers:headers}).then(function (response) {
       console.log(response.data);
     }).catch((error) => {console.log(error)});
