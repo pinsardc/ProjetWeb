@@ -1,15 +1,18 @@
 <template>
+  <baseheader/>
   <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import HelloWorld from './pages/HelloWorld.vue'
+import baseheader from './components/baseheader.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    baseheader
   }
 }
 </script>

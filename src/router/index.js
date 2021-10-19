@@ -9,7 +9,8 @@ import VueRouter from 'vue-router'
   { path: '/HelloWorld', name: 'HelloWorld', component: () => import('../components/HelloWorld.vue') }
 ]*/
 const routes = [
-    { path: '/HelloWorld', component: () => import('../components/HelloWorld.vue') }
+    { path: '/HelloWorld', component: () => import('../pages/HelloWorld.vue') },
+    //{ path: '/baseheader', component: () => import('../components/baseheader.vue') }
   ]
 
 const router = new VueRouter({/*
