@@ -1,6 +1,7 @@
 //import Vue from 'vue'
 //import {createApp} from 'vue';
-import VueRouter from 'vue-router'
+//import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'//nouvelle facon
 //import App from '../App.vue'
 
 //App.use(VueRouter)
@@ -10,13 +11,21 @@ import VueRouter from 'vue-router'
 ]*/
 const routes = [
     { path: '/HelloWorld', component: () => import('../pages/HelloWorld.vue') },
-    //{ path: '/baseheader', component: () => import('../components/baseheader.vue') }
+    { path: '/test', component: () => import('../pages/test.vue') }
+    //{ path: '/insérerNom', component: () => import('../insérer/chemin.vue') }
   ]
 
-const router = new VueRouter({/*
-  mode: 'history',
-  base: process.env.BASE_URL,*/
-  routes: routes
+const router = createRouter({
+  history: createWebHistory('/base-directory/'),
+  routes: routes,
 })
+/*
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes: routes
+})*/
+
+
 
 export default router

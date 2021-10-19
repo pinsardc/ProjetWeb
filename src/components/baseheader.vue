@@ -6,7 +6,9 @@
       <nav>
         <router-link to='/'><i class="fa fa-home" aria-hidden="true"></i> Accueil</router-link>
         <router-link to='/connect'><i class="fa fa-sign-in" aria-hidden="true"></i> Connexion</router-link>
-        <router-link to='/panier'><i class="fa fa-shopping-cart" aria-hidden="true"></i> Panier</router-link>
+        <router-link to='/test'><i class="fa fa-shopping-cart" aria-hidden="true"></i> Panier</router-link>
+        
+
       </nav>
     </header>
     <main>
@@ -15,6 +17,26 @@
     </main>
   </div>
 </template>
+
+<script>
+import router from '../router/index.js';
+
+export default {
+  name: 'HelloWorld',
+  props: {
+    msg: String
+  },
+  
+  methods: {
+      goToTest: function () {
+        console.log("zefpjzfi")
+        router.push('/test').catch(() => {})
+    },
+      
+  },
+}
+</script>
+
 
 <style>
   #app {

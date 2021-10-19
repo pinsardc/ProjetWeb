@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <button class="btn btn-secondary" v-on:click="goToTest()">Aller à la page </button>
     <p>
       For a guide and recipes on how to configure / customize this project,<br>
       check out the
@@ -34,7 +35,7 @@
 
 <script>
 const axios = require('axios');
-//import router from '../router'//si besoin de changement de page
+import router from '../router'//si besoin de changement de page
 
 export default {
   mounted: function(){
@@ -50,6 +51,12 @@ export default {
   props: {
     msg: String
   },
+  methods: {
+      goToTest: function () {
+        console.log("zefpjzfi")
+        router.push('/test').catch(() => {})
+      }
+  }
 }
 </script>
 
