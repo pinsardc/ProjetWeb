@@ -10,7 +10,7 @@ import { createRouter, createWebHistory } from 'vue-router'//nouvelle facon
   { path: '/HelloWorld', name: 'HelloWorld', component: () => import('../components/HelloWorld.vue') }
 ]*/
 const routes = [
-    { path: '/HelloWorld', component: () => import('../pages/HelloWorld.vue') },
+    { path: '/', component: () => import('../pages/HelloWorld.vue') },
     { path: '/test', component: () => import('../pages/test.vue') }
     //{ path: '/insérerNom', component: () => import('../insérer/chemin.vue') }
   ]
