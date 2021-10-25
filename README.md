@@ -32,3 +32,5 @@ npm install
 npm install pg ?
 
 npm install --save axios
+
+npm install dotenv

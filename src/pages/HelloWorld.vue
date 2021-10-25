@@ -34,8 +34,9 @@
 
 
 <script>
-const axios = require('axios');
-import router from '../router'//si besoin de changement de page
+
+const axios = require('axios');//plutôt utiliser import (ne pas )
+import router from '../router'
 
 export default {
   mounted: function(){
@@ -43,7 +44,7 @@ export default {
     var headers = {
           'Content-Type': 'application/json'
       }
-    axios.get('http://localhost:4000/api/test',{headers:headers}).then(function (response) {
+    axios.get('http://localhost:4000/api/test',{headers:headers}).then(function (response) {//remplacer http:... par une variable env
       console.log(response.data);
     }).catch((error) => {console.log(error)});
   },

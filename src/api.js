@@ -6,7 +6,7 @@ const { Client } = require('pg')
 const client = new Client({
   user: 'postgres',
   host: 'localhost',
-  password: 'UltraVerySecretPassword',
+  password: process.env.DB_PASS,//dotenv : process.env.DB_PASS
   database: 'InfoStronksDB'
 })
 //dzdzdd

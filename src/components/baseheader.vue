@@ -19,18 +19,17 @@
 </template>
 
 <script>
-import router from '../router/index.js';
+//import router from '../router/index.js';
 
 export default {
-  name: 'HelloWorld',
+  name: 'BasHeader',
   props: {
-    msg: String
   },
   
   methods: {
       goToTest: function () {
         console.log("zefpjzfi")
-        router.push('/test').catch(() => {})
+        this.$router.push('/test').catch(() => {})
     },
       
   },
