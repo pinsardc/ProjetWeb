@@ -34,3 +34,7 @@ npm install pg ?
 npm install --save axios
 
 npm install dotenv
+
+npm install --save vue-session ?
+
+npm i vue-sessionstorage ?
