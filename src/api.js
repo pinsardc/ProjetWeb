@@ -31,6 +31,27 @@ var User = {
       return db.query('INSERT INTO utilisateurs (username,email,password) VALUES ($1,$2,$3) ', 
       [account.NomEntree,account.EmailEntree,account.PasswordEntree], callback)
   }, 
+  getProduct: function (callback, account) {
+    return db.query('SELECT * FROM produits WHERE id = $1', 
+    [account.IdEntree], callback)
+  },
+  getAllAvailable: function (callback, account) {
+    return db.query('SELECT * FROM produits WHERE quantity > 0', 
+    [account.IdEntree], callback)
+  },
+  isEmpty: function (callback, prod) {
+    var prodList = prod.join();
+    console.log(prodList);
+    return db.query("SELECT * FROM produits WHERE id IN ( "+prodList+" ) AND quantity > 0", callback);
+  },/*Je ne peux pas remplacer la valeur comme on fait d'habitude car j'utilise "IN" et une liste, or je ne peux pas avoir de
+  crochets, et que cela ne fonctionne pas si je substitue par une chaine de caractères 
+  (surement car cela fait une chaine dans la requête)*/
+  updateQuantities: function (callback, prod) {
+    var prodList = prod.join();
+    console.log(prodList);
+    return db.query('UPDATE produits SET quantity = quantity-1 WHERE id IN ( '+prodList+' ) ', 
+     callback)
+  },
 }
 
 
@@ -120,6 +141,35 @@ router.post('/CreateAccount', (req, res) => {
       })
     }
   }, thisaccount)
+})
+
+function fonction() {
+  console.log(x)
+}
+
+function prout() {
+
+}
+
+router.post('/purchase', (req, res) => {
+ idList = [];
+ req.body.products.forEach(element => {
+   idList.push(element.id);
+ });
+ User.isEmpty(function (err, rows) {
+   listAchetes = [];
+   listNoms = [];
+   for (var i = 0; i < rows.rows.length; i++) {
+    listAchetes.push(rows.rows[i].id)
+   }
+   User.updateQuantities(function (err, update) {
+
+    res.json({
+      listAchetes: listAchetes,
+      ruptureList: idList.filter(x => !listAchetes.includes(x)),
+    })
+   }, listAchetes)
+ }, idList)
 })
 
 router.get('/test', (req, res) => {

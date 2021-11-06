@@ -58,6 +58,7 @@ export default {
     font-size: 20px;
     text-decoration: none;
     justify-content: space-between;
+    float: left;
   }
 
   nav a:hover {
@@ -70,7 +71,7 @@ export default {
 
   h1 {
     text-align: left;
-    font-size: 60px;
+    font-size: 30px;
     margin-left: 1%;
     color: white;
     text-shadow: 1px 1px 1px black;

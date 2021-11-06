@@ -1,66 +1,14 @@
 <template>
-        <div>
-        <h2 ALIGN="CENTER">Registration form</h2>
-        <form @submit.prevent="">
-        <table border="0" align="center">
-        <tbody>
-
-        <tr>
-        <td><label for="id">Id: </label></td>
-        <td><input id="id" maxlength="50" name="name" type="text" /></td>
-        </tr>
-
-        <tr>
-        <td><label for="name">Name: </label></td>
-        <td><input id="name" maxlength="50" name="name" type="text" /></td>
-        </tr>
-
-        <tr>
-        <td><label for="course">Course: </label></td>
-        <td><input id="course" maxlength="50" name="course" type="text" /></td>
-        </tr>
-
-        <tr>
-        <td><label for="branch">Branch: </label></td>
-        <td><input id="branch" maxlength="50" name="branch" type="text" /></td>
-        </tr>
-
-        <tr>
-        <td><label for="rolln0">Rollno: </label></td>
-        <td><input id="rollno" maxlength="50" name="rollno" type="text" /></td>
-        </tr>
-
-        <tr>
-        <td><label for="email">Email_Address:</label></td>
-        <td><input id="email" maxlength="50" name="email" type="text" /></td>
-        </tr>
-
-        <tr>
-        <td><label for="username">User_Name:</label></td>
-        <td><input id="username" maxlength="50" name="username" type="text" /></td>
-        </tr>
-
-        <tr>
-        <td><label for="aboutus">About Us:</label></td>
-        <td valign="middle" align="center"><textarea></textarea></td>
-        </tr>
-
-        <tr>
-        <td><label for="password">Password:</label></td>
-        <td><input id="password" maxlength="50" name="password"
-        type="password" /></td>
-        </tr>
-
-        <tr>
-        <td align="right"><input name="Submit" v-on:click="CreerCompte()" type="Submit" value="Add" /></td>
-        </tr>
-
-        </tbody>
-        </table>
-
-        </form>
-
-    </div>
+  <div>
+    <h2>Se créer un compte</h2>
+    <form submit.prevent="">
+      <input v-model="email" id="email" placeholder="email" />
+      <input v-model="username" id="username" placeholder="username" />
+      <input v-model="password" type="password" id="password" placeholder="password" />
+      <input type="confirm_password" id="confirm_password" placeholder="Comfirmez votre mot de passe" />
+      <button type="submit" v-on:click="CreerCompte()">S'inscrire</button>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -82,6 +30,11 @@ export default {
       this.username = document.getElementById("username").value
       this.password = document.getElementById("password").value
       this.email = document.getElementById("email").value
+
+      if (this.password == document.getElementById("confirm_password").value) {
+        alert("Les deux mots de passes sont différents")
+        return null;
+      }
       
       var headers = {
           'Content-Type': 'application/json'
@@ -108,5 +61,22 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.form {
+  justify-content: center;
+}
+
+button {
+  border-radius: 5px;
+  background-color: greenyellow;
+}
+
+input {
+  width: 250px;
+  border-radius: 5px;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 5px;
+  display: grid;
+}
 </style>
