@@ -56,9 +56,21 @@ export default {
         },
         {
             id: 4,
-            description: "Gigabyte Aero 17 HDR YC-9FR5760SP 4K / RTX 3080",
-            price: 4799,
-            img: "gigabyte-aero-17-hdr-yc-9fr5760sp-4k-rtx-3080.jpg",
+            description: "PC Gamer du mois de novembre",
+            price: 1379,
+            img: "pc-gamer-month.jpg",
+        },
+        {
+            id: 5,
+            description: "PC Gamer LE MINI",
+            price: 2539,
+            img: "lemini.jpg",
+        },
+        {
+            id: 6,
+            description: "PC Gamer RTX 3070ti",
+            price: 1855,
+            img: "pcgamerrtx3070ti.jpg",
         },
         ],
         panier : []
