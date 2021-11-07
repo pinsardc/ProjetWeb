@@ -6,7 +6,6 @@
       <nav>
         <router-link to='/'><i class="fa fa-home" aria-hidden="true"></i> Accueil</router-link>
         <router-link to='/Login'><i class="fa fa-shopping-cart" aria-hidden="true"></i> Connexion</router-link>
-        <router-link to='/test'><i class="fa fa-shopping-cart" aria-hidden="true"></i> Panier</router-link>
         <router-link to='/Produits'><i class="fa fa-shopping-cart" aria-hidden="true"></i> Produits</router-link>
         <router-link to='/CreerCompte'><i class="fa fa-shopping-cart" aria-hidden="true"></i> Créer un compte</router-link>
         
@@ -21,19 +20,9 @@
 </template>
 
 <script>
-//import router from '../router/index.js';
-
 export default {
   name: 'BaseHeader',
   props: {
-  },
-  
-  methods: {
-      goToTest: function () {
-        console.log("zefpjzfi")
-        this.$router.push('/test').catch(() => {})
-    },
-      
   },
 }
 </script>

@@ -2,16 +2,8 @@ const express = require('express')
 const router = express.Router()
 var bodyParser = require('body-parser')
 router.use(bodyParser.json())
-//var db = require('./db')
 const bcrypt = require('bcrypt')
-const { Client } = require('pg')
-
-const db = new Client({
-  user: 'postgres',
-  host: 'localhost',
-  password: process.env.DB_PASS,//dotenv : process.env.DB_PASS
-  database: 'InfoStronksDB'
-})
+const db = require('./db.js')
 db.connect()
 
 var User = {
@@ -30,25 +22,15 @@ var User = {
   register: function (callback, account){
       return db.query('INSERT INTO utilisateurs (username,email,password) VALUES ($1,$2,$3) ', 
       [account.NomEntree,account.EmailEntree,account.PasswordEntree], callback)
-  }, 
-  getProduct: function (callback, account) {
-    return db.query('SELECT * FROM produits WHERE id = $1', 
-    [account.IdEntree], callback)
-  },
-  getAllAvailable: function (callback, account) {
-    return db.query('SELECT * FROM produits WHERE quantity > 0', 
-    [account.IdEntree], callback)
   },
   isEmpty: function (callback, prod) {
     var prodList = prod.join();
-    console.log(prodList);
     return db.query("SELECT * FROM produits WHERE id IN ( "+prodList+" ) AND quantity > 0", callback);
   },/*Je ne peux pas remplacer la valeur comme on fait d'habitude car j'utilise "IN" et une liste, or je ne peux pas avoir de
   crochets, et que cela ne fonctionne pas si je substitue par une chaine de caractères 
   (surement car cela fait une chaine dans la requête)*/
   updateQuantities: function (callback, prod) {
     var prodList = prod.join();
-    console.log(prodList);
     return db.query('UPDATE produits SET quantity = quantity-1 WHERE id IN ( '+prodList+' ) ', 
      callback)
   },
@@ -83,31 +65,13 @@ router.post('/connect', (req, res) => {
   }, thisaccount)
 })
 
-// A SUPPIRMER ?
-router.post('/allowCreation', (req, res) => {   
-  var thisaccount = {
-      NomEntree: req.body.username,
-      PasswordEntree: req.body.password
-  }
-  User.getNom(function (err, rows) {
-      if (rows.length > 0) {
-          res.json({
-              message: 'L\'identifiant est déjà utilisé'
-          })
-      } else {
-          res.json({
-              message: 'Rien'
-          })
-      }
-  }, thisaccount)
-})
-
 router.post('/CreateAccount', (req, res) => {
   var thisaccount = {
       NomEntree: req.body.username,
       PasswordEntree: req.body.password,
       EmailEntree: req.body.email
   }
+  var ok = false
   
   User.getNom(function (err, rows) {
 
@@ -117,11 +81,13 @@ router.post('/CreateAccount', (req, res) => {
           bcrypt.hash(thisaccount.PasswordEntree, 10, function(err, hash) {
             
             thisaccount.PasswordEntree = hash;
-            var x = User.register(function (err, rows) {
+            User.register(function (err, rows) {
+              ok = true
               res.json({
                   message: "Votre compte a bien été enregistré",
                   username: thisaccount.NomEntree,
-                  email: thisaccount.EmailENtree
+                  email: thisaccount.EmailENtree,
+                  ok: ok
               })
             }, thisaccount)
           });
@@ -142,14 +108,6 @@ router.post('/CreateAccount', (req, res) => {
     }
   }, thisaccount)
 })
-
-function fonction() {
-  console.log(x)
-}
-
-function prout() {
-
-}
 
 router.post('/purchase', (req, res) => {
  idList = [];
@@ -172,24 +130,4 @@ router.post('/purchase', (req, res) => {
  }, idList)
 })
 
-router.get('/test', (req, res) => {
-    get_test().then((result)=>{
-        bcrypt.compare("blablabla", "$2a$10$87fIe/u/3jDIQWWrIgYvM.e6esirEfiuRKNhIzOy5kV5oHA5be8DK", function(err, mdpResult) {
-            console.log(mdpResult);
-      });
-      res.status(200).json(result.rows)//.json(mdpResult)
-    })
-  
-    async function get_test () {
-      var sql = "select * from utilisateurs"
-      return await db.query({
-        text: sql,
-      })
-    }
-  })
-
-  router.get('/truc', (req, res) => {
-    res.json({message:"Ca marche"});
-  })
-
-  module.exports = router
+module.exports = router

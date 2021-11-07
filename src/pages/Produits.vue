@@ -29,7 +29,8 @@
 </template>
 
 <script>
-const axios = require('axios');//plutôt utiliser import (ne pas )
+import router from '../router'
+const axios = require('axios');//ne fonctionne pas avec un import
 export default {
     data() {
         return {
@@ -103,6 +104,7 @@ export default {
                 else {
                     alert("Achats effectués !")
                 }
+                router.push('/Montage').catch(() => {})
             })
         }
     }

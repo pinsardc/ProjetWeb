@@ -29,12 +29,15 @@ npm install cors --save
 
 npm install
 
-npm install pg ?
+npm install pg
 
 npm install --save axios
 
 npm install dotenv
 
-npm install --save vue-session ?
+npm i vue-sessionstorage
 
-npm i vue-sessionstorage ?
+npm install vue3-date-time-picker 
+
+LANCER LE SERVEUR : npm run serve
+LANCER L'API : node server.js

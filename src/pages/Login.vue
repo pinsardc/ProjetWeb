@@ -13,7 +13,7 @@
 </template>
 
 <script>
-const axios = require('axios');//plutôt utiliser import (ne pas )
+const axios = require('axios');//ne fonctionne pas avec un import
 import router from '../router'
 
 export default {

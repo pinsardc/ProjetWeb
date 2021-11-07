@@ -5,14 +5,14 @@
       <input v-model="email" id="email" placeholder="email" />
       <input v-model="username" id="username" placeholder="username" />
       <input v-model="password" type="password" id="password" placeholder="password" />
-      <input type="confirm_password" id="confirm_password" placeholder="Comfirmez votre mot de passe" />
+      <input type="password" id="confirm_password" placeholder="Comfirmez votre mot de passe" />
       <button type="submit" v-on:click="CreerCompte()">S'inscrire</button>
     </form>
   </div>
 </template>
 
 <script>
-const axios = require('axios');//plutôt utiliser import (ne pas )
+const axios = require('axios');//ne fonctionne pas avec un import
 import router from '../router'
 
 export default {
@@ -30,8 +30,7 @@ export default {
       this.username = document.getElementById("username").value
       this.password = document.getElementById("password").value
       this.email = document.getElementById("email").value
-
-      if (this.password == document.getElementById("confirm_password").value) {
+      if (this.password !== document.getElementById("confirm_password").value) {
         alert("Les deux mots de passes sont différents")
         return null;
       }
@@ -47,9 +46,7 @@ export default {
         email: this.email
       }
       await axios.post('http://localhost:4000/api/CreateAccount', data, {headers:headers}).then(function (response) {
-          console.log(self)
-          console.log(self.$session)
-        if (response.data.message === "Votre compte a bien été enregistré") {
+        if (response.data.ok) {
           self.$storage.setStorageSync('username',response.data.username);
           self.$storage.setStorageSync('email',response.data.email);
           router.push('/Login').catch(() => {})

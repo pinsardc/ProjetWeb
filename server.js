@@ -1,12 +1,12 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const cors = require('cors')//à voir peut etre retirer
+const cors = require('cors')//Nécessaire
 
 require('dotenv').config({ path: './src/Variables.env' })
 
 app.use(express.static(path.join(__dirname, 'dist/')))
-app.use(cors())//à voir peut etre retirer
+app.use(cors())//Nécessaire
 
 var apiController = require('./src/api')
 app.use('/api', apiController)
